@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-// Example route for analysis page
-router.get('/analysis', (req, res) => {
-  // Add your analysis logic here
-  res.send('Analysis Page');
-});
+const analysisController = require("../controllers/analysisController");
+const authenticate = require("../middleware/authMiddleware");
+
+router.get("/total-income", authenticate, analysisController.getTotalIncome);
+router.get("/income-category", authenticate, analysisController.getIncomeByCategory);
+router.get("/monthly-income", authenticate, analysisController.getMonthlyIncome);
+
 
 module.exports = router;
